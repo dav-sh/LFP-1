@@ -28,11 +28,23 @@ public class PanelMenu extends JPanel {
         JTextArea textArea = new JTextArea("Escribe algo");
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0; c.gridy = 0; c.gridwidth = 2; c.gridheight = 3; 
+        //el weighty y weightx es el valor de si estirar o no las filas y columnas, debemos de resetarla
+        //para que no afecte a los demas componentes, al igual que el fill, es es el estitar en si el elemento
+        c.weighty=1.0; c.weightx=1.0; c.fill = GridBagConstraints.BOTH;
         this.add(textArea, c);
+        c.weighty=0.0; c.weightx=0.0;
         
+
+        
+
+
         //boton abrir
         c.gridx = 2; c.gridy = 0; c.gridwidth = 1; c.gridheight = 1; 
+        c.weighty=1.0; c.fill = GridBagConstraints.HORIZONTAL; c.anchor = GridBagConstraints.NORTHEAST;
+
         JButton a = createButton("Abrir", layout, c);
+        c.weighty=0.0;  c.anchor = GridBagConstraints.CENTER;
+
         a.addActionListener(new ActionListener() {
 
 			@Override
@@ -47,7 +59,12 @@ public class PanelMenu extends JPanel {
 
         //boton guardar
         c.gridx = 2; c.gridy = 1; c.gridwidth = 1; c.gridheight = 1; 
+        c.weighty=1.0; c.anchor = GridBagConstraints.NORTHEAST;
+
+
         JButton g = createButton("Guardar", layout, c);
+        c.weighty=0.0; c.anchor = GridBagConstraints.CENTER;
+
         g.addActionListener(new ActionListener() {
 
 			@Override
@@ -62,7 +79,11 @@ public class PanelMenu extends JPanel {
         //boton evaluar
 
         c.gridx = 2; c.gridy = 2; c.gridwidth = 1; c.gridheight = 1; 
+        c.weighty=1.0; c.fill = GridBagConstraints.NONE; c.anchor = GridBagConstraints.NORTHEAST;
+
         JButton e = createButton("Evaluar", layout, c);
+        c.weighty=0.0;
+
         e.addActionListener(new ActionListener() {
 
 			@Override
@@ -76,7 +97,9 @@ public class PanelMenu extends JPanel {
          //boton reportes
 
          c.gridx = 2; c.gridy = 3; c.gridwidth = 1; c.gridheight = 1; 
+         c.weighty=0.0; c.fill = GridBagConstraints.NONE; c.anchor = GridBagConstraints.NORTHEAST;
          JButton r = createButton("Reportes", layout, c);
+         c.weighty=0.0;
          r.addActionListener(new ActionListener() {
  
              @Override
