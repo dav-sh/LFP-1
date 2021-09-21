@@ -79,7 +79,7 @@ public class PanelMenu extends JPanel {
         //boton evaluar
 
         c.gridx = 2; c.gridy = 2; c.gridwidth = 1; c.gridheight = 1; 
-        c.weighty=1.0; c.fill = GridBagConstraints.NONE; c.anchor = GridBagConstraints.NORTHEAST;
+        c.weighty=1.0; c.anchor = GridBagConstraints.NORTHEAST;
 
         JButton e = createButton("Evaluar", layout, c);
         c.weighty=0.0;
@@ -97,7 +97,7 @@ public class PanelMenu extends JPanel {
          //boton reportes
 
          c.gridx = 2; c.gridy = 3; c.gridwidth = 1; c.gridheight = 1; 
-         c.weighty=0.0; c.fill = GridBagConstraints.NONE; c.anchor = GridBagConstraints.NORTHEAST;
+         c.weighty=0.0; c.anchor = GridBagConstraints.NORTHEAST;
          JButton r = createButton("Reportes", layout, c);
          c.weighty=0.0;
          r.addActionListener(new ActionListener() {
@@ -109,6 +109,7 @@ public class PanelMenu extends JPanel {
              
          });
          this.add(r);
+         c.fill = GridBagConstraints.NONE;
 
 
     }
