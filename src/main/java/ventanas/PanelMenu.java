@@ -27,7 +27,7 @@ public class PanelMenu extends JPanel {
         //text area
         JTextArea textArea = new JTextArea("Escribe algo");
         GridBagConstraints c = new GridBagConstraints();
-        c.gridx = 0; c.gridy = 0; c.gridwidth = 2; c.gridheight = 2; 
+        c.gridx = 0; c.gridy = 0; c.gridwidth = 2; c.gridheight = 3; 
         this.add(textArea, c);
         
         //boton abrir
@@ -72,6 +72,20 @@ public class PanelMenu extends JPanel {
             
         });
         this.add(e);
+
+         //boton reportes
+
+         c.gridx = 2; c.gridy = 3; c.gridwidth = 1; c.gridheight = 1; 
+         JButton r = createButton("Reportes", layout, c);
+         r.addActionListener(new ActionListener() {
+ 
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Hola soy Reportes");
+             }
+             
+         });
+         this.add(r);
 
 
     }
