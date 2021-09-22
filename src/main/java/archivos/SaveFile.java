@@ -27,13 +27,13 @@ public class SaveFile {
         if(archivoR.exists()){
             System.out.println("El archivo ya existe: " + archivoR.getAbsolutePath());
         }else{
-            new File(archivoR.getAbsolutePath() + ".txt");
+            archivoR = new File(archivoR.getAbsolutePath() + ".txt");
             System.out.println("El archivo ha sido creado: "+archivoR.getAbsolutePath());
+            writeText(archivoR);
             // File archivo = new File(fileChooser.getSelectedFile()+".txt"); //sirve para crear un archivo y especifica la extension
 
         }
         
-        writeText(archivoR);
 
         
     }
@@ -45,7 +45,9 @@ public class SaveFile {
         FileWriter writer=null;
         try {
             writer = new FileWriter(archivo, true);
-            writer.write("Holaaaaa");
+            writer.write(this.textArea.getText());
+            //writer.write("Holaaaaa"); ejemplo para guardar texto
+            System.out.println(this.textArea.getText());
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
