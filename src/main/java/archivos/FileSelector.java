@@ -1,11 +1,14 @@
 package archivos;
 
 import javax.swing.JFileChooser;
+import javax.swing.JTextArea;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*Clase encargada de seleccionar el archivo de texto */
 public class FileSelector {
-    public FileSelector(){
+    JTextArea textarea;
+    public FileSelector(JTextArea textarea) {
+        this.textarea = textarea;
         file();  
     }
 
@@ -21,7 +24,7 @@ public class FileSelector {
             System.out.println("You chose to open this file: " +
                 fileChooser.getSelectedFile().getName());
                 try {
-                    new Reader(fileChooser);
+                    new Reader(fileChooser, this.textarea);
                 } catch (Exception e) {
                     System.out.println("No se envio el archivo o no se pudo elegir correctament");    
                 }

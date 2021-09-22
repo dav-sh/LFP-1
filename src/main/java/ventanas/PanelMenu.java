@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 /**Clase encargada de manejar los elementos dentro del JPanel del menu principal. */
 public class PanelMenu extends JPanel {
+    JTextArea textArea;
     public PanelMenu(){
         createPanel();
 
@@ -25,7 +26,7 @@ public class PanelMenu extends JPanel {
         this.setLayout (layout); // Definimos el tipo de layout
 
         //text area
-        JTextArea textArea = new JTextArea("Escribe algo");
+        textArea = new JTextArea("Escribe algo");
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0; c.gridy = 0; c.gridwidth = 2; c.gridheight = 3; 
         //el weighty y weightx es el valor de si estirar o no las filas y columnas, debemos de resetarla
@@ -50,7 +51,7 @@ public class PanelMenu extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Hola soy abrir");
-                new archivos.FileSelector();
+                new archivos.FileSelector(textArea);
 			}
             
         });
