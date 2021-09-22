@@ -51,7 +51,7 @@ public class PanelMenu extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Hola soy abrir");
-                new archivos.FileSelector(textArea);
+                new archivos.FileOpen(textArea);
 			}
             
         });
@@ -71,10 +71,15 @@ public class PanelMenu extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Hola soy Guardar");
+                new archivos.FileSave(textArea);
 			}
             
         });
         this.add(g);
+
+
+
+
 
 
         //boton evaluar

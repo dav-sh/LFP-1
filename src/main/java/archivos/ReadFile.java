@@ -7,14 +7,14 @@ import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
 
 /*Clase encargada de leer el archivo de texto*/
-public class Reader {
+public class ReadFile {
     JTextArea textarea;
     JFileChooser f;
     FileReader fr;
     BufferedReader rdr;
 
 
-    public Reader(JFileChooser file, JTextArea textarea){
+    public ReadFile(JFileChooser file, JTextArea textarea){
         this.f = file;
         this.textarea = textarea;
 
@@ -26,15 +26,14 @@ public class Reader {
             
             
         } catch (FileNotFoundException e) {
-            
-            System.out.println("ALgo salio mal");
             System.out.println("Archivo no encontrado");
         }finally{
-            
             System.out.println("Archivo cerrado");
         }
 
     }
+
+
 
 
     private void leerArchivo() {
@@ -53,6 +52,11 @@ public class Reader {
             System.out.println("Algo salio mal al leer el archivo de texto");
         }
     }
+
+
+
+
+    
 
     private void updateText(int count, String text){
         this.textarea.append("Ln: "+count+".  "+text+"\n");
