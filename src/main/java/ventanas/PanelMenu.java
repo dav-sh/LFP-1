@@ -3,6 +3,9 @@ package ventanas;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+
+import analizador.Automata;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -90,6 +93,7 @@ public class PanelMenu extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Hola soy Evaluar");
+                new Automata();
 			}
             
         });
