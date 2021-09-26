@@ -2,12 +2,15 @@ package analizador;
 
 import javax.swing.JTextArea;
 
+/**
+ * Clase encargada de analizar las palabras del texto en pantalla. 
+*/
 public class Automata {
     String texto;
     int posicion;
     int estadoActual = 0;
     int estadosAceptacion[] = {1,2,3,4,5,7,8}; //B,C,D,E,F,I,J
-    String [] estadosAceptacionT={"B-Identificador","C-Entero","D-Puntuacion","E-Aritmetico","F-Indentificador+","I-Float","J-Agrupacion"};
+    String [] estadosAceptacionT={"B-Identificador","C-Entero","D-Puntuacion","E-Aritmetico","F-Indentificador+","I-Decimal","J-Agrupacion"};
 
     /** 
      * A=0  B=1  C=2  D=3   E=4   F=5  H=6 I=7 J=8
@@ -36,8 +39,12 @@ public class Automata {
         estados[7][0]= -1 ;     estados[7][1]= 7  ;   estados[7][2]= -1 ;   estados[7][3]= -1 ;     estados[7][4]= -1 ;   estados[7][5]= -1 ;   
         //J  
         estados[8][0]= -1 ;     estados[8][1]= -1 ;   estados[8][2]= -1 ;   estados[8][3]= -1 ;     estados[8][4]= -1 ;   estados[8][5]= -1 ;   
-
     }
+
+
+
+
+
 
     //revisamos el movimiento en la matriz
     public int getNextEstado(int estadoActual, int tipoCaracter){
@@ -49,6 +56,9 @@ public class Automata {
 
         return result;
     }
+
+
+
 
 
     //metodo para devoler el simbolo o texto del estado final
@@ -64,8 +74,6 @@ public class Automata {
         }
         return respuesta;
     }
-
-
 
 
 
@@ -90,7 +98,7 @@ public class Automata {
             result = 2;
         }    
         else{
-            System.out.println("probando");
+            //System.out.println("probando");
             for(char tmp : puntuacion){
                 if(tmp == caracter){
                     result = 3;
@@ -117,11 +125,17 @@ public class Automata {
 
 
 
+
+
+
     //constructor de la clase automata
     public Automata(JTextArea textArea) { 
         texto=textArea.getText();
         leeTexto();
     }
+
+
+
 
 
     //metodo encargado de continuar leer el texto mientras recorre cada char de la palabra a analizar
@@ -130,6 +144,9 @@ public class Automata {
             leePalabra();
         }
     }
+
+
+
 
 
     //metodo encargado de analizar cada char de la palabra
