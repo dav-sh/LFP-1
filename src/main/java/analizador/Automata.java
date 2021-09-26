@@ -133,10 +133,13 @@ public class Automata {
     }
 
     public void leePalabra(){
+        String palabra="";
         estadoActual =0;
         boolean continuar = true;
         while(posicion<texto.length() && continuar){
+            
             char c = texto.charAt(posicion);
+            palabra+=c;
             if(Character.isSpaceChar(c) ||  Character.toString(c).equals("\n")){
                 //Aqui se evaluan los espacios y saltos de linea
                 continuar = false;
@@ -156,7 +159,7 @@ public class Automata {
             }
             posicion++;
         }
-        System.out.println("termino en el estado actual "+estadoActual + "-->"+getEstadoFinal(estadoActual));
+        System.out.println("termino en el estado actual "+estadoActual + "-->"+getEstadoFinal(estadoActual)+" palabra: "+ palabra);
     }
 
 
