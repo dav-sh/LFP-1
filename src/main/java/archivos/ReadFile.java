@@ -13,7 +13,7 @@ public class ReadFile {
     FileReader fr;
     BufferedReader rdr;
 
-
+    /**Constructor de la clase ReadFile*/
     public ReadFile(JFileChooser file, JTextArea textarea){
         this.f = file;
         this.textarea = textarea;
@@ -35,7 +35,7 @@ public class ReadFile {
 
 
 
-
+    /**Metodo encargado de leer el archivo */
     private void leerArchivo() {
         int count = 0;
         String linea;

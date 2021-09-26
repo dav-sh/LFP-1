@@ -18,7 +18,7 @@ public class Automata {
     //String [] estadosAceptacionT={"B-Identificador","C-Entero","D-Puntuacion","E-Aritmetico","F-Indentificador+","I-Decimal","J-Agrupacion"};
     //git stash para eliminar cambios no guardados con commit
 
-    //constructor de la clase automata
+    /*constructor de la clase automata*/
     public Automata(JTextArea textArea, Reporte report) { 
         this.reporte = report;
         texto=textArea.getText();
@@ -58,7 +58,7 @@ public class Automata {
 
 
 
-    //revisamos el movimiento en la matriz
+    /*revisamos el movimiento en la matriz*/
     public int getNextEstado(int estadoActual, int tipoCaracter){
         int result = -1; //si fuera error        
 

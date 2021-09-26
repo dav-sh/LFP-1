@@ -18,17 +18,22 @@ public class PanelMenu extends JPanel {
     JTextArea textArea;
     Reporte report = new Reporte();
 
-
+    /**Constructor de la clase PanelMenu. */
     public PanelMenu(){
         createPanel();
 
     }
+
+
     /*Este metodo sirve para crear los botones del menu principal */
     public JButton createButton(String name, GridBagLayout layout, GridBagConstraints c){
         JButton button = new JButton(name);
         layout.setConstraints(button, c);
         return button;
     }
+
+
+
     /*Metodo encargado de crear el panel dle menu principal*/
     public void createPanel() {
         GridBagLayout layout = new GridBagLayout();

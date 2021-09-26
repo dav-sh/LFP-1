@@ -12,13 +12,14 @@ public class SaveFile {
     JFileChooser fileChooser;
     JTextArea textArea;
 
+    /**Constructor de SaveFile*/
     public SaveFile(JFileChooser fileChooser2, JTextArea textarea) {
         this.textArea = textarea;
         this.fileChooser = fileChooser2;
         saveText();
     }
 
-
+    /**Metodo encargado de guardar el documento de texto*/
     public void saveText(){
         fileChooser.setApproveButtonText("Guardar");
         //File archivo = fileChooser.getSelectedFile(); //sirve apra crear un archivo pero no especifica la extension
@@ -40,7 +41,7 @@ public class SaveFile {
 
 
 
-
+    /**Metodo encargado de escribir el texto en un archivo para posteriormente guardarlo */
     public void writeText(File archivo){
         FileWriter writer=null;
         try {
