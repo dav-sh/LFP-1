@@ -70,7 +70,7 @@ public class Automata {
     }
 
 
-    //metodo para devoler el simbolo o texto del estado final
+    /*metodo para devoler el simbolo o texto del estado final*/
 
     public String getEstadoActual(int estadoActual) {
         String result = "Error "+estadoActual;
@@ -89,7 +89,7 @@ public class Automata {
 
 
 
-    //revisa dentro de nuestro alfabeto
+    /*revisa dentro de nuestro alfabeto*/
     public int getIntTipoCaracter(char caracter) {
         //Definimos el alfabeto restante
         char[] puntuacion = {'.',',',';',':'};
@@ -143,7 +143,7 @@ public class Automata {
 
 
 
-    //metodo encargado de continuar leer el texto mientras recorre cada char de la palabra a analizar
+    /*metodo encargado de continuar leer el texto mientras recorre cada char de la palabra a analizar*/
     public void leeTexto(){
         while(posicion<texto.length()){
             leePalabra();
@@ -154,7 +154,7 @@ public class Automata {
 
 
 
-    //metodo encargado de analizar cada char de la palabra
+    /*metodo encargado de analizar cada char de la palabr*/
     public void leePalabra(){
         String palabra="";
         estadoActual =0;

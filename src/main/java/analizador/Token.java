@@ -2,7 +2,7 @@ package analizador;
 
 public enum Token {
 
-
+    /**Tokens validos */
     IDENTIFICADOR(1, "IDENTIFICADOR"), //IDENTIFICADOR CORTO EX. A 
     ENTERO(2,"ENTERO"), //ENTERO CORTO EX. 2
     PUNTUACION(3, "PUNTUACION"),
