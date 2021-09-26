@@ -20,10 +20,12 @@ public enum Token {
         return this.nombre;
     }
 
-    private int estado;
-    private String nombre;
+    private final int estado;
+    private final String nombre;
     
-
+    /**Constructor
+     * Aqui se inicializan los valores a cada enum
+     */
     private Token(int estado, String nombre){
         this.estado = estado;
         this.nombre = nombre;

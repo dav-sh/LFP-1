@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import analizador.Automata;
+import analizador.Token;
+import reportes.Reporte;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,6 +16,9 @@ import java.awt.event.ActionListener;
 /**Clase encargada de manejar los elementos dentro del JPanel del menu principal. */
 public class PanelMenu extends JPanel {
     JTextArea textArea;
+    Reporte report = new Reporte();
+
+
     public PanelMenu(){
         createPanel();
 
@@ -120,7 +125,7 @@ public class PanelMenu extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Hola soy Evaluar");
-                new Automata(textArea);
+                new Automata(textArea, report);
 			}
             
         });
@@ -143,6 +148,10 @@ public class PanelMenu extends JPanel {
              @Override
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Hola soy Reportes");
+                //  for(int tmp: report.getContadores()){
+                //      System.out.println(" " + tmp);
+                //  }
+                System.out.println(report.getcontadorEstado(Token.IDENTIFICADOR));
              }
              
          });

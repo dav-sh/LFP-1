@@ -1,6 +1,9 @@
 package analizador;
 
 import javax.swing.JTextArea;
+import reportes.Reporte;
+
+
 
 /**
  * Clase encargada de analizar las palabras del texto en pantalla. 
@@ -9,15 +12,24 @@ public class Automata {
     String texto;
     int posicion;
     int estadoActual = 0;
-    int estadosAceptacion[] = {1,2,3,4,5,7,8}; //B,C,D,E,F,I,J
-    String [] estadosAceptacionT={"B-Identificador","C-Entero","D-Puntuacion","E-Aritmetico","F-Indentificador+","I-Decimal","J-Agrupacion"};
+    Token []tokens = Token.values();
+    Reporte reporte = null;
+    //int estadosAceptacion[] = {1,2,3,4,5,7,8}; //B,C,D,E,F,I,J
+    //String [] estadosAceptacionT={"B-Identificador","C-Entero","D-Puntuacion","E-Aritmetico","F-Indentificador+","I-Decimal","J-Agrupacion"};
+    //git stash para eliminar cambios no guardados con commit
+
+    //constructor de la clase automata
+    public Automata(JTextArea textArea, Reporte report) { 
+        this.reporte = report;
+        texto=textArea.getText();
+        leeTexto();
+    }
 
     /** 
      * A=0  B=1  C=2  D=3   E=4   F=5  H=6 I=7 J=8
      * ERROR = -1
      */
 
-     //git stash para eliminar cambios no guardados con commit
     int [][] estados = new int[9][6];
     {
         //  L                          D                    .                       P                      A                      G
@@ -58,22 +70,19 @@ public class Automata {
     }
 
 
-
-
-
     //metodo para devoler el simbolo o texto del estado final
-    public String getEstadoFinal(int estadoActualFinal){
-        String respuesta = "Error: " + estadoActualFinal;
-        int pos = 0;
-        for(int estado : estadosAceptacion){
-            if(estadoActualFinal==estado){
-                respuesta = estadosAceptacionT[pos];
+
+    public String getEstadoActual(int estadoActual) {
+        String result = "Error "+estadoActual;
+        for(Token tmp : tokens) {
+            if(tmp.getNumeroEstado()==estadoActual) {
+                result = tmp.getNombreEstado();
                 break;
             }
-            pos++;
         }
-        return respuesta;
+        return result;
     }
+
 
 
 
@@ -128,11 +137,7 @@ public class Automata {
 
 
 
-    //constructor de la clase automata
-    public Automata(JTextArea textArea) { 
-        texto=textArea.getText();
-        leeTexto();
-    }
+    
 
 
 
@@ -158,8 +163,8 @@ public class Automata {
             
             char c = texto.charAt(posicion);
             palabra+=c;
-            if(Character.isSpaceChar(c) ||  Character.toString(c).equals("\n")){
-                //Aqui se evaluan los espacios y saltos de linea
+
+            if(Character.isSpaceChar(c) ||  Character.toString(c).equals("\n")){  //Aqui se evaluan los espacios y saltos de linea
                 continuar = false;
                 if(Character.toString(texto.charAt(posicion)).equals("\n")){
                     System.out.println("Este es un salto de linea");
@@ -177,7 +182,19 @@ public class Automata {
             }
             posicion++;
         }
-        System.out.println("termino en el estado actual "+estadoActual + "-->"+getEstadoFinal(estadoActual)+" palabra: "+ palabra);
+        //System.out.println("termino en el estado actual "+estadoActual + "-->"+getEstadoFinal(estadoActual)+" palabra: "+ palabra);
+        System.out.println("termino en el estado actual "+estadoActual + "-->"+ getEstadoActual(estadoActual)+" palabra: "+ palabra);
+        reporte.contadorEstados(estadoActual,palabra);
+
+        //addReport(estadoActual,palabra);
+    }
+    
+
+
+
+    public void addReport(int estadoActual,String palabra){
+        reporte.contadorEstados(estadoActual,palabra);
+
     }
 
 
