@@ -120,7 +120,7 @@ public class PanelMenu extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Hola soy Evaluar");
-                new Automata();
+                new Automata(textArea);
 			}
             
         });
