@@ -13,6 +13,8 @@ public class Automata {
      * A=0  B=1  C=2  D=3   E=4   F=5  H=6 I=7 J=8
      * ERROR = -1
      */
+
+     //git stash para eliminar cambios no guardados con commit
     int [][] estados = new int[9][6];
     {
         //  L                          D                    .                       P                      A                      G
@@ -28,8 +30,6 @@ public class Automata {
         estados[4][0]= -1 ;     estados[4][1]= -1 ;   estados[4][2]= -1 ;   estados[4][3]= -1 ;     estados[4][4]= -1 ;   estados[4][5]= -1 ;   
         //F 
         estados[5][0]= 5  ;     estados[5][1]= 5  ;   estados[5][2]= -1 ;   estados[5][3]= -1 ;     estados[5][4]= -1 ;   estados[5][5]= -1 ;   
-        //G
-        //estados[6][0]= -1 ;     estados[6][1]= 6  ;   estados[6][2]= -1 ;   estados[6][3]= -1 ;     estados[6][4]= -1 ;   estados[6][5]= -1 ;   
         //H 
         estados[6][0]= -1 ;     estados[6][1]= 6  ;   estados[6][2]= -1 ;   estados[6][3]= -1 ;     estados[6][4]= -1 ;   estados[6][5]= -1 ;   
         //I
