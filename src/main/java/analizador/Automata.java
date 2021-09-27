@@ -103,7 +103,7 @@ public class Automata {
             result = 0;
         }else if(Character.isDigit(caracter)){
             result = 1;
-        }else if(caracter == '.'){
+        }else if(caracter == '.' && estadoActual!=0){
             result = 2;
         }    
         else{
