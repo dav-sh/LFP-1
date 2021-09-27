@@ -8,8 +8,8 @@ public enum Token {
     PUNTUACION(3, "PUNTUACION"),
     ARITMETICO(4, "ARITMETICO"),
     IDENTIFICADOR2(5, "IDENTIFICADOR"),
-    DECIMAL(6,"DECIMAL"),
-    AGRUPACION(7, "AGRUPACION")
+    DECIMAL(7,"DECIMAL"),
+    AGRUPACION(8, "AGRUPACION")
     ;
     
     public int getNumeroEstado(){
