@@ -87,8 +87,9 @@ public class PanelMenu extends JPanel {
         //Aqui agrego el textarea del # de lienas
         c.gridx = 0; c.gridy = 0; c.gridwidth = 1; c.gridheight = 3; //posicion x,y cuantas casillas ocupa ancho, alto
         //el weighty y weightx es el valor de si estirar o no las filas y columnas, debemos de resetarla
-        c.weighty=1.0; c.weightx=0.1; c.fill = GridBagConstraints.BOTH; //el eje y debe estirarse, el eje x no, y solo se estira en vertial en %
+        c.weighty=1.0; c.weightx=0.0; c.fill = GridBagConstraints.BOTH; //el eje y debe estirarse, el eje x no, y solo se estira en vertial en %
         c.anchor = GridBagConstraints.FIRST_LINE_START; //
+        scrollPaneLabel.setPreferredSize(new Dimension(22,20));
         this.add(scrollPaneLabel, c);
         c.weighty=0.0; c.weightx=0.0;
         
