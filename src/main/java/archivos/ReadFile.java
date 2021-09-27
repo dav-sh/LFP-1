@@ -12,9 +12,13 @@ public class ReadFile {
     JFileChooser f;
     FileReader fr;
     BufferedReader rdr;
+    JTextArea tLabel;
 
-    /**Constructor de la clase ReadFile*/
-    public ReadFile(JFileChooser file, JTextArea textarea){
+    /**Constructor de la clase ReadFile
+     * @param tlabel
+     * */
+    public ReadFile(JFileChooser file, JTextArea textarea, JTextArea tlabel){
+        this.tLabel= tlabel;
         this.f = file;
         this.textarea = textarea;
 
@@ -37,14 +41,14 @@ public class ReadFile {
 
     /**Metodo encargado de leer el archivo */
     private void leerArchivo() {
-        int count = 0;
+        //int count = 0; //vere que uso le doy
         String linea;
         this.textarea.setText("");
         try {
             while((linea=rdr.readLine())!=null){
-                count++;
+                // count++; parte de
                 System.out.println(linea);
-                updateText(count,linea);
+                updateText(linea);
 
             }
             
@@ -59,7 +63,7 @@ public class ReadFile {
     
     /**Metodo encargado de actualizar el texto del TextArea con el numero de linea correspondiente 
      * SOLO al cargar un archivo ya existente */
-    private void updateText(int count, String text){
-        this.textarea.append("Ln: "+count+".  "+text+"\n");
+    private void updateText(String textL){
+        this.textarea.append(textL+"\n");
     }
 }

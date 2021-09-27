@@ -11,13 +11,22 @@ public class Reporte {
     /** 
      * Inicializa los contadores
      */
-                      //I E P A D G !
-    private int[] contadores = {0,0,0,0,0,0,0};
+                             //I E P A D G !
+    private int[] contadores= {0,0,0,0,0,0,0};
+
     Token []tokens = Token.values();
-    private ArrayList<String> palabras = new ArrayList<String>();
+    private ArrayList<String> palabras = new ArrayList<>();
 
     public Reporte() {
        //constructor 
+    //    contadores[0]=0; //IDENTIFICADOR
+    //    contadores[1]=0; //ENTERO
+    //    contadores[2]=0; //PUNTUACION
+    //    contadores[3]=0; //ARITMETICO
+    //    contadores[4]=0; //DECIMAL
+    //    contadores[5]=0; //AGRUPACION
+    //    contadores[6]=0; //ERROR
+       //contadores 
     }
 
     /**Este metodo es el encargado de manejar los contaderes de estado evaluando los parametros recibidos  */
@@ -142,6 +151,12 @@ public class Reporte {
         return tmp;
     }
 
+    /**Este metodo se encargara de resetar los valores de los contadores al ser llamado por el boton evaluar*/
+    public void setContadores(int valor){
+        for(int i = 0; i < contadores.length; i++){
+            contadores[i] = valor;
+        }
+    }
 
 
 }

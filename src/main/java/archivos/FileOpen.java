@@ -7,8 +7,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 /*Clase encargada de seleccionar el archivo de texto */
 public class FileOpen {
     JTextArea textarea;
-    public FileOpen(JTextArea textarea) {
+    JTextArea Tlabel;
+    public FileOpen(JTextArea textarea, JTextArea tlabel) {
         this.textarea = textarea;
+        this.Tlabel = tlabel;
         file();  
     }
 
@@ -24,7 +26,7 @@ public class FileOpen {
             System.out.println("You chose to open this file: " +
                 fileChooser.getSelectedFile().getName());
                 try {
-                    new ReadFile(fileChooser, this.textarea);
+                    new ReadFile(fileChooser, this.textarea,Tlabel);
                 } catch (Exception e) {
                     System.out.println("No se envio el archivo o no se pudo elegir correctament");    
                 }

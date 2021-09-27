@@ -13,7 +13,7 @@ public class Menu {
     public void construye() {
         JFrame frame = new JFrame("Principal");
         frame.setDefaultCloseOperation(3);
-        frame.add(new PanelMenu());
+        frame.add(new PanelMenu(frame));
         frame.setSize(600, 400);
         frame.setVisible(true);
         

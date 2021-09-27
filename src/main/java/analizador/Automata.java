@@ -15,7 +15,6 @@ public class Automata {
     Token []tokens = Token.values();
     Reporte reporte = null;
     //int estadosAceptacion[] = {1,2,3,4,5,7,8}; //B,C,D,E,F,I,J
-    //String [] estadosAceptacionT={"B-Identificador","C-Entero","D-Puntuacion","E-Aritmetico","F-Indentificador+","I-Decimal","J-Agrupacion"};
     //git stash para eliminar cambios no guardados con commit
 
     /*constructor de la clase automata*/
@@ -107,7 +106,6 @@ public class Automata {
             result = 2;
         }    
         else{
-            //System.out.println("probando");
             for(char tmp : puntuacion){
                 if(tmp == caracter){
                     result = 3;
@@ -145,6 +143,7 @@ public class Automata {
 
     /*metodo encargado de continuar leer el texto mientras recorre cada char de la palabra a analizar*/
     public void leeTexto(){
+        reporte.setContadores(0); //Aqui se resetean los valores de los contadores, al iniciar un nuevo analisis
         while(posicion<texto.length()){
             leePalabra();
         }
@@ -156,13 +155,12 @@ public class Automata {
 
     /*metodo encargado de analizar cada char de la palabr*/
     public void leePalabra(){
-        String palabra="";
+        StringBuilder palabra = new StringBuilder();
         estadoActual =0;
         boolean continuar = true;
         while(posicion<texto.length() && continuar){
-            
             char c = texto.charAt(posicion);
-            palabra+=c;
+            palabra.append(c);
 
             if(Character.isSpaceChar(c) ||  Character.toString(c).equals("\n")){  //Aqui se evaluan los espacios y saltos de linea
                 continuar = false;
@@ -177,16 +175,13 @@ public class Automata {
                 int estadoTemporal = getNextEstado(estadoActual, getIntTipoCaracter(c)); //el segundo valor es el caracter que mandamos (texto) que se convierte a int en el metodo getIntTipoCaracter
                 //Aqui va el automata
                 System.out.println("estado actual "+estadoActual+" Caracter: "+c +" estado temporal(siguiente) "+ estadoTemporal);
-                //System.out.println(texto.charAt(posicion));
                 estadoActual = estadoTemporal;
             }
             posicion++;
         }
-        //System.out.println("termino en el estado actual "+estadoActual + "-->"+getEstadoFinal(estadoActual)+" palabra: "+ palabra);
-        System.out.println("termino en el estado actual "+estadoActual + "-->"+ getEstadoActual(estadoActual)+" palabra: "+ palabra);
-        reporte.contadorEstados(estadoActual,palabra);
+        System.out.println("termino en el estado actual "+estadoActual + "-->"+ getEstadoActual(estadoActual)+" palabra: "+ palabra.toString());
+        reporte.contadorEstados(estadoActual,palabra.toString());
 
-        //addReport(estadoActual,palabra);
     }
     
 
