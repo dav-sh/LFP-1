@@ -57,7 +57,8 @@ public class ReadFile {
 
 
     
-
+    /**Metodo encargado de actualizar el texto del TextArea con el numero de linea correspondiente 
+     * SOLO al cargar un archivo ya existente */
     private void updateText(int count, String text){
         this.textarea.append("Ln: "+count+".  "+text+"\n");
     }
