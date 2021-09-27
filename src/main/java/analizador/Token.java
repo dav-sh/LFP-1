@@ -9,7 +9,11 @@ public enum Token {
     ARITMETICO(4, "ARITMETICO"),
     IDENTIFICADOR2(5, "IDENTIFICADOR"),
     DECIMAL(7,"DECIMAL"),
-    AGRUPACION(8, "AGRUPACION")
+    AGRUPACION(8, "AGRUPACION"),
+
+    /**Token invalido */
+    ERROR(-1, "ERROR"), //ERROR
+    ERROR2(6, "ERROR"), //ERROR
     ;
     
     public int getNumeroEstado(){

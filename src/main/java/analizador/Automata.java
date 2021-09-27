@@ -11,6 +11,8 @@ import reportes.Reporte;
 public class Automata {
     String texto;
     int posicion;
+    int posicionSinEspacio;
+
     int estadoActual = 0;
     Token []tokens = Token.values();
     Reporte reporte = null;
@@ -37,7 +39,7 @@ public class Automata {
         //B
         estados[1][0]= 5  ;     estados[1][1]= 5  ;   estados[1][2]= -1 ;   estados[1][3]= -1 ;     estados[1][4]= -1 ;   estados[1][5]= -1 ;   
         //C 
-        estados[2][0]= -1 ;     estados[2][1]= 2  ;   estados[2][2]= 7  ;   estados[2][3]= -1 ;     estados[2][4]= -1 ;   estados[2][5]= -1 ;   
+        estados[2][0]= -1 ;     estados[2][1]= 2  ;   estados[2][2]= 6  ;   estados[2][3]= -1 ;     estados[2][4]= -1 ;   estados[2][5]= -1 ;   
         //D 
         estados[3][0]= -1 ;     estados[3][1]= -1 ;   estados[3][2]= -1 ;   estados[3][3]= -1 ;     estados[3][4]= -1 ;   estados[3][5]= -1 ;   
         //E
@@ -143,7 +145,8 @@ public class Automata {
 
     /*metodo encargado de continuar leer el texto mientras recorre cada char de la palabra a analizar*/
     public void leeTexto(){
-        reporte.setContadores(0); //Aqui se resetean los valores de los contadores, al iniciar un nuevo analisis
+        reporte.resetContadores(); //Aqui se resetean los valores de los contadores, al iniciar un nuevo analisis
+        reporte.resetArrays(); //Aqui se resetean los arrays con las palabras y posicones de error
         while(posicion<texto.length()){
             leePalabra();
         }
@@ -165,9 +168,11 @@ public class Automata {
             if(Character.isSpaceChar(c) ||  Character.toString(c).equals("\n")){  //Aqui se evaluan los espacios y saltos de linea
                 continuar = false;
                 if(Character.toString(texto.charAt(posicion)).equals("\n")){
+                    posicionSinEspacio = 0;
                     System.out.println("Este es un salto de linea");
 
                 }else{
+                    posicionSinEspacio = posicion;
                     System.out.println("Este es un espacio");
                 }
             }
@@ -180,17 +185,17 @@ public class Automata {
             posicion++;
         }
         System.out.println("termino en el estado actual "+estadoActual + "-->"+ getEstadoActual(estadoActual)+" palabra: "+ palabra.toString());
-        reporte.contadorEstados(estadoActual,palabra.toString());
+        if(posicionSinEspacio<posicion){
+            posicionSinEspacio = posicion;
+        }
+        reporte.contadorEstados(estadoActual,palabra.toString(),posicionSinEspacio);
 
     }
     
 
 
 
-    public void addReport(int estadoActual,String palabra){
-        reporte.contadorEstados(estadoActual,palabra);
-
-    }
+    
 
 
 }
