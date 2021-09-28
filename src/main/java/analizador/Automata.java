@@ -11,8 +11,8 @@ import reportes.Reporte;
 public class Automata {
     String texto;
     int posicion;
-    int posicionSinEspacio;
-
+    int fila=1;
+    int columna = 1;
     int estadoActual = 0;
     Token []tokens = Token.values();
     Reporte reporte = null;
@@ -160,35 +160,48 @@ public class Automata {
     public void leePalabra(){
         StringBuilder palabra = new StringBuilder();
         estadoActual =0;
+        int columnaValida=0;
         boolean continuar = true;
         while(posicion<texto.length() && continuar){
             char c = texto.charAt(posicion);
-            palabra.append(c);
-
-            if(Character.isSpaceChar(c) ||  Character.toString(c).equals("\n")){  //Aqui se evaluan los espacios y saltos de linea
+            
+            //Aqui se evalua si el caracter es un espacio o salto de linea
+            if(Character.isSpaceChar(c) ||  Character.toString(c).equals("\n")){  
                 continuar = false;
-                if(Character.toString(texto.charAt(posicion)).equals("\n")){
-                    posicionSinEspacio = 0;
-                    System.out.println("Este es un salto de linea");
 
-                }else{
-                    posicionSinEspacio = posicion;
-                    System.out.println("Este es un espacio");
+                if(Character.toString(c).equals("\n")){
+                    System.out.println("Posicion:"+ columna + " = salto linea ");
+                    fila++;
+                    columna=0; //inicializa en 0 ya que el contador la aumenta a 1
+                    
+                }else if(Character.isSpaceChar(c) ){ 
+                        System.out.println("Posicion:"+ columna + " = Espacio " );
                 }
+
+
             }
             else{
-                int estadoTemporal = getNextEstado(estadoActual, getIntTipoCaracter(c)); //el segundo valor es el caracter que mandamos (texto) que se convierte a int en el metodo getIntTipoCaracter
+                //si el char(c) no es un espacio o columna, se agrega en la palabra 
+                palabra.append(c);
+
+                //el segundo valor es el caracter que mandamos (char) que nos devuelve un int correspondiente a un tipo de token en el metodo getIntTipoCaracter
+                int estadoTemporal = getNextEstado(estadoActual, getIntTipoCaracter(c)); 
+                
                 //Aqui va el automata
-                System.out.println("estado actual "+estadoActual+" Caracter: "+c +" estado temporal(siguiente) "+ estadoTemporal);
+                System.out.println("estado actual "+estadoActual+" Caracter: "+c +" estado temporal(siguiente) "+ estadoTemporal+ " posicion: "+ posicion);
                 estadoActual = estadoTemporal;
+                columnaValida = columna;
+
+                
+
             }
+            columna++;
             posicion++;
         }
-        System.out.println("termino en el estado actual "+estadoActual + "-->"+ getEstadoActual(estadoActual)+" palabra: "+ palabra.toString());
-        if(posicionSinEspacio<posicion){
-            posicionSinEspacio = posicion;
-        }
-        reporte.contadorEstados(estadoActual,palabra.toString(),posicionSinEspacio);
+        System.out.println("Me movi del estado "+estadoActual + " al estado "+ getEstadoActual(estadoActual)+" con un(a) "+ palabra.toString()+" ->*columna: "+columnaValida + "  fila "+ fila);
+        
+        //creamos el reporte el cual tiene por parametros el estado actual del token(si es valido o no), el lexema completo(palabra evaluada), el numero de columna en donde se encontro, el numeor de fila donde se encontro 
+        reporte.contadorEstados(estadoActual,palabra.toString(),columnaValida,fila);
 
     }
     

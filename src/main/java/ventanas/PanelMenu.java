@@ -182,19 +182,24 @@ public class PanelMenu extends JPanel {
              public void actionPerformed(ActionEvent e) {
                  System.out.println("Hola soy Reportes");
                 for(Token tmp : Token.values()){
-                    // if(tmp!=Token.IDENTIFICADOR2 && tmp!=Token.ERROR2){
-                    //     System.out.println(tmp.getNombreEstado() + " " + report.getcontadorEstado(tmp));  
+                    /*
+                    if(tmp!=Token.IDENTIFICADOR2 && tmp!=Token.ERROR2){
+                        System.out.println(tmp.getNombreEstado() + " " + report.getcontadorEstado(tmp));  
 
-                    // }
+                    }
+
+                    */
+                    
                     if(tmp==Token.ERROR ){
 
                         System.out.println(tmp.getNombreEstado() + " " + report.getcontadorEstado(tmp));
                         System.out.println("****************");
                     }
+                    
                 }
                 int pos = 0;
                 for(String tmp : report.getPalabrasError()){
-                    System.out.println(tmp+" "+report.getPosicionError()[pos]);
+                    System.out.println("Lexema: "+ tmp+" |Columna "+report.getPosicionError()[pos] + " |fila?");
                     pos++;
                 } 
              }

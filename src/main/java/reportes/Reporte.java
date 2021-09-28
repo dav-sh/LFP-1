@@ -15,7 +15,8 @@ public class Reporte {
     private int[] contadores= {0,0,0,0,0,0,0};
     Token []tokens = Token.values();
     private ArrayList<String> palabrasError = new ArrayList<>();
-    private ArrayList<Integer> posicionError = new ArrayList<>();
+    private ArrayList<Integer> columnaError = new ArrayList<>();
+    private ArrayList<Integer> FilaError = new ArrayList<>();
 
     public Reporte() {
        //constructor 
@@ -31,11 +32,12 @@ public class Reporte {
 
     /**Este metodo es el encargado de manejar los contaderes de estado evaluando los parametros recibidos  
      * @param posicion
+     * @param fila
      * */
-    public void contadorEstados(int estadoActual,String palabra, int posicion) {
+    public void contadorEstados(int estadoToken,String palabra, int columna, int fila) {
         for(Token tmp : tokens) {
-            if(tmp.getNumeroEstado()==estadoActual) {
-                contadorEstados(tmp, palabra, posicion); //sumamos al contador
+            if(tmp.getNumeroEstado()==estadoToken) {
+                contadorEstados(tmp, palabra, columna, fila); //sumamos al contador
             }
         }
     }
@@ -44,7 +46,7 @@ public class Reporte {
     /**Este metodo se encarga de aumentar en 1 el contador de estados si se cumple la condicion 
      * @param posicion
      * */
-    private void contadorEstados(Token tmp, String palabra, int posicion) {
+    private void contadorEstados(Token tmp, String palabra, int columna, int fila) {
         
         switch (tmp) {
             case IDENTIFICADOR:
@@ -85,13 +87,13 @@ public class Reporte {
             case ERROR:
                 contadores[6]++;
                 palabrasError.add(palabra); //y agregamos la palabra a la lista de palabras
-                posicionError.add(posicion);
+                columnaError.add(columna);
                 break;
             
             case ERROR2:
                 contadores[6]++;
                 palabrasError.add(palabra); //y agregamos la palabra a la lista de palabras
-                posicionError.add(posicion);
+                columnaError.add(columna);
                 break;
             
             default:
@@ -170,9 +172,9 @@ public class Reporte {
      * almacenadas que cumplen con los tokens aceptados
      * */
     public String[] getPosicionError(){
-        String[] pos = new String[posicionError.size()];
+        String[] pos = new String[columnaError.size()];
         for(int i = 0; i < pos.length; i++){
-            pos[i] = posicionError.get(i).toString();
+            pos[i] = columnaError.get(i).toString();
         }
         return pos;
     }
@@ -187,7 +189,7 @@ public class Reporte {
     /**Este metodo se encargara de resetar los valores de los arrays*/
 
     public void resetArrays(){
-        posicionError.clear();
+        columnaError.clear();
         palabrasError.clear();
     }
 
