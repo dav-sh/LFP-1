@@ -14,9 +14,16 @@ public class Reporte {
                              //I E P A D G !
     private int[] contadores= {0,0,0,0,0,0,0};
     Token []tokens = Token.values();
+
+    //PALABRAS VALIDAS
+    private ArrayList<String> palabrasAgregadas = new ArrayList<>();
+    private ArrayList<Integer> columnasRegistradas = new ArrayList<>();
+    private ArrayList<Integer> filasRegistradas = new ArrayList<>();
+
+    //PALABRAS INVALIDAS
     private ArrayList<String> palabrasError = new ArrayList<>();
-    private ArrayList<Integer> columnaError = new ArrayList<>();
-    private ArrayList<Integer> FilaError = new ArrayList<>();
+    private ArrayList<Integer> columnasError = new ArrayList<>();
+    private ArrayList<Integer> filasError = new ArrayList<>();
 
     public Reporte() {
        //constructor 
@@ -30,10 +37,9 @@ public class Reporte {
        //contadores 
     }
 
-    /**Este metodo es el encargado de manejar los contaderes de estado evaluando los parametros recibidos  
-     * @param posicion
-     * @param fila
-     * */
+    /**
+     * Este metodo es el encargado de manejar los contaderes de estado evaluando los parametros recibidos  
+    */
     public void contadorEstados(int estadoToken,String palabra, int columna, int fila) {
         for(Token tmp : tokens) {
             if(tmp.getNumeroEstado()==estadoToken) {
@@ -43,67 +49,47 @@ public class Reporte {
     }
 
 
-    /**Este metodo se encarga de aumentar en 1 el contador de estados si se cumple la condicion 
-     * @param posicion
-     * */
+    /**
+     * Este metodo se encarga de aumentar en 1 el contador de estados si se cumple la condicion 
+    */
     private void contadorEstados(Token tmp, String palabra, int columna, int fila) {
         
-        switch (tmp) {
-            case IDENTIFICADOR:
-                contadores[0]++;
-                break;
-
-            case IDENTIFICADOR2:
-                contadores[0]++;
-
-                break;
-
-            case ENTERO:
-                contadores[1]++;
-
-                break;
-            
-            
-            case PUNTUACION:
-                contadores[2]++;
-
-                break;
-
-            case ARITMETICO:
-                contadores[3]++;
-
-                break;
-
-            case DECIMAL:
-                contadores[4]++;
-
-                break;
-
-            case AGRUPACION:
-                contadores[5]++;
-
-                break;
-            
-            case ERROR:
-                contadores[6]++;
-                palabrasError.add(palabra); //y agregamos la palabra a la lista de palabras
-                columnaError.add(columna);
-                break;
-            
-            case ERROR2:
-                contadores[6]++;
-                palabrasError.add(palabra); //y agregamos la palabra a la lista de palabras
-                columnaError.add(columna);
-                break;
-            
-            default:
-                break;
+        if(tmp==Token.IDENTIFICADOR || tmp==Token.IDENTIFICADOR2){
+            contadores[0]++;
+            registrar(palabra, columna, fila);
         }
+        else if(tmp==Token.ENTERO){
+            contadores[1]++;
+            registrar(palabra, columna, fila);
+        }
+        else if(tmp==Token.PUNTUACION){
+            contadores[2]++;
+            registrar(palabra, columna, fila);
+        }
+        else if(tmp==Token.ARITMETICO){
+            contadores[3]++;
+                registrar(palabra, columna, fila);
+        }
+        else if(tmp==Token.DECIMAL){
+            contadores[4]++;
+                registrar(palabra, columna, fila);
+        }
+        else if(tmp==Token.AGRUPACION){
+            contadores[5]++;
+                registrar(palabra, columna, fila);
+        }
+        else if(tmp==Token.ERROR || tmp==Token.ERROR2){
+            contadores[6]++;
+            registrarError(palabra, columna, fila);
+        }
+
     }
 
 
 
-    /**Este metodo se encarga de devolver el contador de estados recibiendo por parametro un token (enum) */
+    /**
+     * Este metodo se encarga de devolver el contador de estados recibiendo por parametro un token (enum) 
+     * */
     public int getcontadorEstado(Token token) {
         int contador=0;
         switch (token) {
@@ -111,10 +97,6 @@ public class Reporte {
                 contador = contadores[0];
                 break;
 
-            case IDENTIFICADOR2:
-                contador = contadores[0];
-
-                break;
 
             case ENTERO:
                 contador = contadores[1];
@@ -152,13 +134,98 @@ public class Reporte {
         return contador;
     }
 
-    /**Este metodo se encarga de devolver el array (int) de los contadores */
+    /**
+     * Este metodo se encarga de devolver el array (int) de los contadores 
+    */
     public int[] getContadores(){
         return contadores;
     }
 
-    /**Este metodo se encarga de devolver el array (String) de palabras con ERROR o no ACEPTADAS
-     * almacenadas que cumplen con los tokens aceptados
+    /**
+     * Este metodo se encarga de devolver el array (String) de palabras con guardadas o
+     * almacenadas que cumplen con los tokens VALIDOS
+     * */
+    public String[] getPalabrasGuardadas(){
+        String[] tmp = new String[palabrasAgregadas.size()];
+        for(int i = 0; i < tmp.length; i++){
+            tmp[i] = palabrasAgregadas.get(i);
+        }
+        return tmp;
+    }
+
+    /**
+     * Este metodo se encarga de devolver el array (String) de la posicion de las COLUMNAS de las palabras
+     * almacenadas que cumplen con los tokens VALIDOS
+     * */
+    public String[] getPosicionColumna(){
+        String[] pos = new String[columnasRegistradas.size()];
+        for(int i = 0; i < pos.length; i++){
+            pos[i] = columnasRegistradas.get(i).toString();
+        }
+        return pos;
+    }
+
+    /**
+     * Este metodo se encarga de devolver el array (String) de la posicion de las FILAS de las palabras
+     * almacenadas que cumplen con los tokens VALIDOS
+     * */
+    public String[] getPosicionFila(){
+        String[] pos = new String[columnasRegistradas.size()];
+        for(int i = 0; i < pos.length; i++){
+            pos[i] = filasRegistradas.get(i).toString();
+        }
+        return pos;
+    }
+
+
+    /**
+     * Este metodo se encargara de resetar los valores de los contadores al ser llamado por el boton evaluar
+    */
+    public void resetContadores(){
+        for(int i = 0; i < contadores.length; i++){
+            contadores[i] = 0;
+        }
+    }
+
+
+
+
+    /**
+     * Este metodo se encargara de resetar los valores de los arrays
+    */
+    public void resetArrays(){
+        columnasRegistradas.clear();
+        palabrasAgregadas.clear();
+        filasRegistradas.clear();
+
+        palabrasError.clear();
+        columnasError.clear();
+        filasError.clear();
+
+    }
+
+    /** 
+     * Metodo encargado de registrar las palabras VALIDAS, filas y columnas de los reportes
+    */
+    private void registrar(String palabra, int columna, int fila){
+        palabrasAgregadas.add(palabra); //y agregamos la palabra a la lista de palabras
+        columnasRegistradas.add(columna);
+        filasRegistradas.add(fila);
+    }
+
+    /** 
+     * Metodo encargado de registrar las palabras ERRONEAS, filas y columnas de los reportes
+    */
+    private void registrarError(String palabra, int columna, int fila){
+        palabrasError.add(palabra); //y agregamos la palabra a la lista de palabras
+        columnasError.add(columna);
+        filasError.add(fila);
+    }
+
+
+    /**
+     * Este metodo se encarga de devolver el array (String) de palabras con guardadas o
+     * almacenadas que cumplen con los tokens INVALIDOS
      * */
     public String[] getPalabrasError(){
         String[] tmp = new String[palabrasError.size()];
@@ -168,30 +235,30 @@ public class Reporte {
         return tmp;
     }
 
-    /**Este metodo se encarga de devolver el array (String) de la posicion con ERROR o no ACEPTADAS
-     * almacenadas que cumplen con los tokens aceptados
+    /**
+     * Este metodo se encarga de devolver el array (String) de la posicion de las COLUMNAS de las palabras
+     * almacenadas que cumplen con los tokens INVALIDOS
      * */
-    public String[] getPosicionError(){
-        String[] pos = new String[columnaError.size()];
+    public String[] getPosicionColumnaError(){
+        String[] pos = new String[columnasError.size()];
         for(int i = 0; i < pos.length; i++){
-            pos[i] = columnaError.get(i).toString();
+            pos[i] = columnasError.get(i).toString();
         }
         return pos;
     }
 
-    /**Este metodo se encargara de resetar los valores de los contadores al ser llamado por el boton evaluar*/
-    public void resetContadores(){
-        for(int i = 0; i < contadores.length; i++){
-            contadores[i] = 0;
+    /**
+     * Este metodo se encarga de devolver el array (String) de la posicion de las FILAS de las palabras
+     * almacenadas que cumplen con los tokens INVALIDOS
+     * */
+    public String[] getPosicionFilaError(){
+        String[] pos = new String[columnasError.size()];
+        for(int i = 0; i < pos.length; i++){
+            pos[i] = filasError.get(i).toString();
         }
+        return pos;
     }
 
-    /**Este metodo se encargara de resetar los valores de los arrays*/
-
-    public void resetArrays(){
-        columnaError.clear();
-        palabrasError.clear();
-    }
 
 
 }

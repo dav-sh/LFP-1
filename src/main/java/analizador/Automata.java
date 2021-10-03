@@ -59,7 +59,9 @@ public class Automata {
 
 
 
-    /*revisamos el movimiento en la matriz*/
+    /**
+     * Metodo que se encarga de devolver el siguiente movimiento en la matriz 
+    */
     public int getNextEstado(int estadoActual, int tipoCaracter){
         int result = -1; //si fuera error        
 
@@ -71,7 +73,9 @@ public class Automata {
     }
 
 
-    /*metodo para devoler el simbolo o texto del estado final*/
+    /**
+     * Metodo encargado de devolver el simbolo o texto del estado final
+    */
 
     public String getEstadoActual(int estadoActual) {
         String result = "Error "+estadoActual;
@@ -90,7 +94,9 @@ public class Automata {
 
 
 
-    /*revisa dentro de nuestro alfabeto*/
+    /** 
+     * Metodo encargado de revisar si el caracter esta dentro de nuestro alfabeto
+    */
     public int getIntTipoCaracter(char caracter) {
         //Definimos el alfabeto restante
         char[] puntuacion = {'.',',',';',':'};
@@ -143,7 +149,9 @@ public class Automata {
 
 
 
-    /*metodo encargado de continuar leer el texto mientras recorre cada char de la palabra a analizar*/
+    /*
+    *Metodo encargado de continuar leer el texto mientras recorre cada char de la palabra a analizar
+    */
     public void leeTexto(){
         reporte.resetContadores(); //Aqui se resetean los valores de los contadores, al iniciar un nuevo analisis
         reporte.resetArrays(); //Aqui se resetean los arrays con las palabras y posicones de error
@@ -156,11 +164,14 @@ public class Automata {
 
 
 
-    /*metodo encargado de analizar cada char de la palabr*/
+    /**
+     * Metodo encargado de analizar cada char de la palabra
+    */
     public void leePalabra(){
         StringBuilder palabra = new StringBuilder();
         estadoActual =0;
         int columnaValida=0;
+        int filaValida=1;
         boolean continuar = true;
         while(posicion<texto.length() && continuar){
             char c = texto.charAt(posicion);
@@ -171,7 +182,7 @@ public class Automata {
 
                 if(Character.toString(c).equals("\n")){
                     System.out.println("Posicion:"+ columna + " = salto linea ");
-                    fila++;
+                    fila++; //Si dectecta un salto de linea aumenta en 1 el numero de filas
                     columna=0; //inicializa en 0 ya que el contador la aumenta a 1
                     
                 }else if(Character.isSpaceChar(c) ){ 
@@ -187,21 +198,19 @@ public class Automata {
                 //el segundo valor es el caracter que mandamos (char) que nos devuelve un int correspondiente a un tipo de token en el metodo getIntTipoCaracter
                 int estadoTemporal = getNextEstado(estadoActual, getIntTipoCaracter(c)); 
                 
-                //Aqui va el automata
+                //Si no detecta salto de linea o espacio reconoce la cadena como valida sin importar que este en error y guarda su posicion
                 System.out.println("estado actual "+estadoActual+" Caracter: "+c +" estado temporal(siguiente) "+ estadoTemporal+ " posicion: "+ posicion);
                 estadoActual = estadoTemporal;
                 columnaValida = columna;
-
-                
-
+                filaValida = fila;
             }
             columna++;
             posicion++;
         }
-        System.out.println("Me movi del estado "+estadoActual + " al estado "+ getEstadoActual(estadoActual)+" con un(a) "+ palabra.toString()+" ->*columna: "+columnaValida + "  fila "+ fila);
+        System.out.println("Me movi del estado "+estadoActual + " al estado "+ getEstadoActual(estadoActual)+" con un(a) "+ palabra.toString()+" ->*columna: "+columnaValida + "  fila "+ filaValida);
         
         //creamos el reporte el cual tiene por parametros el estado actual del token(si es valido o no), el lexema completo(palabra evaluada), el numero de columna en donde se encontro, el numeor de fila donde se encontro 
-        reporte.contadorEstados(estadoActual,palabra.toString(),columnaValida,fila);
+        reporte.contadorEstados(estadoActual,palabra.toString(),columnaValida,filaValida);
 
     }
     
