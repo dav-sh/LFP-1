@@ -180,7 +180,15 @@ public class PanelMenu extends JPanel {
  
              @Override
              public void actionPerformed(ActionEvent e) {
-                 System.out.println("Hola soy Reportes");
+                System.out.println("Hola soy Reportes");
+                if(report.getcontadorEstado(Token.ERROR)>=1){
+                    new ReporteJF(true, report);
+                }else{
+                    new ReporteJF(false, report);
+                }
+                
+                /*
+
                 for(Token tmp : Token.values()){
                     /*
                     if(tmp!=Token.IDENTIFICADOR2 && tmp!=Token.ERROR2){
@@ -188,7 +196,7 @@ public class PanelMenu extends JPanel {
 
                     }
 
-                    */
+                    
                     
                     if(tmp==Token.ERROR ){
 
@@ -202,6 +210,7 @@ public class PanelMenu extends JPanel {
                     System.out.println("Lexema: "+ tmp+" |Columna "+report.getPosicionError()[pos] + " |fila?");
                     pos++;
                 } 
+                */
              }
              
          });
