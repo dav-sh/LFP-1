@@ -1,5 +1,6 @@
 package ventanas;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -7,6 +8,8 @@ import javax.swing.JTextArea;
 import analizador.Token;
 import reportes.Reporte;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class PanelReporte extends JPanel{
@@ -83,7 +86,23 @@ public class PanelReporte extends JPanel{
                 }
             }
         }
-        this.add(scrollPane, BorderLayout.CENTER);
+        if(existeError){
+            this.add(scrollPane, BorderLayout.CENTER);
+
+        }else{
+            JButton button = new JButton("Click me");
+            button.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Aqui genera el otro reporte xd
+                    
+                }
+                
+            });
+            this.add(scrollPane, BorderLayout.CENTER);
+            this.add(button, BorderLayout.SOUTH);
+        }
     }
 
 
