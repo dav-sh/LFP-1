@@ -2,6 +2,7 @@ package ventanas;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import analizador.Token;
 import reportes.Reporte;
@@ -13,6 +14,7 @@ public class PanelReporte extends JPanel{
     Token token;
     boolean existeError;
     Reporte reporte;
+    JTable table;
     public PanelReporte(boolean b, Reporte reporte) {
         this.existeError = b;
         this.reporte = reporte;
@@ -22,49 +24,68 @@ public class PanelReporte extends JPanel{
     public void imprimeInfo(){
         // Definimos el layout
         this.setLayout(new BorderLayout());
-
-        //creamos el JtextArea y definimos sus valores, agregandolas al panel correspondiente
-        textarea = new JTextArea();
-        textarea.setEditable(false);
-
-        //creamos el scroll por si fuera necesario
-        JScrollPane scrollPane = new JScrollPane(textarea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED );
-        this.add(scrollPane, BorderLayout.CENTER);
- 
+        
         //Logica del reporte
+        pintaTabla(existeError);
+    }
+    
+    
+    public void pintaTabla(boolean existeError){
+        String [] tipoToken = null;
+        String []nombreLexema=null;
+        String []colToken=null;
+        String []filToken=null;
+        String texto=null;
+        int numCols=4;
         if(existeError){
-            token = Token.ERROR;
-            System.out.println("Estoy con el token "+ token.getNombreEstado());
+            nombreLexema=reporte.getPalabrasError();
+            colToken=reporte.getPosicionColumnaError();
+            filToken=reporte.getPosicionFilaError();
+            texto="No. Error";
 
-            //Devuelve el contador del token error
-            textarea.setText(token.getNombreEstado() + " " + reporte.getcontadorEstado(token)+"\n\n\n\n");
-
-            //IMPRIME el listado de palabras ERRONEAS con su posicion
-            int pos = 0;
-            for(String tmp : reporte.getPalabrasError()){
-                textarea.append("Lexema: "+ tmp+" |Columna "+reporte.getPosicionColumnaError()[pos] + " |fila "+reporte.getPosicionFilaError()[pos]+"\n");
-                pos++;
-            } 
+        }else{
+            tipoToken = reporte.getTokensAgregados();
+            nombreLexema=reporte.getPalabrasGuardadas();
+            colToken=reporte.getPosicionColumna();
+            filToken=reporte.getPosicionFila();
+            texto="TIPO TOKEN";
         }
-        else{
-            //Devuelve el contador de tokens validos
-            for(Token tmp : Token.values()){
-                
-                if(tmp!=Token.IDENTIFICADOR2 && tmp!=Token.ERROR2 && tmp!=Token.ERROR){
-                    textarea.append(tmp.getNombreEstado() + " " + reporte.getcontadorEstado(tmp)+"\n");  
 
+        //Creamos el Jtable y le agregamos el scroll
+        table = new JTable(nombreLexema.length,numCols);
+        JScrollPane scrollPane = new JScrollPane(table,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);    
+
+        //Definimos nombre de las columnas
+        table.getColumnModel().getColumn(0).setHeaderValue(texto);
+        table.getColumnModel().getColumn(1).setHeaderValue("LEXEMA");
+        table.getColumnModel().getColumn(2).setHeaderValue("COLUMNA");
+        table.getColumnModel().getColumn(3).setHeaderValue("FILA");
+
+        //imprimeInfo
+        for(int i= 0; i <nombreLexema.length;i++){ //fila
+            for(int j= 0; j < numCols;j++){ //columnas
+                if(j==0){ //
+                    if(existeError){
+                        table.setValueAt(i+1, i, j);
+
+                    }else{
+                        table.setValueAt(tipoToken[i],i,j);
+                    }
+                }
+                else if(j==1){
+                    table.setValueAt(nombreLexema[i], i, j);
+                }
+                else if(j==2){
+                    table.setValueAt(colToken[i], i, j);
+
+                }else if(j==3){
+                    table.setValueAt(filToken[i], i, j);
                 }
             }
-
-            //IMPRIME el listado de palabras ACEPTADAS con su respectiva posicion
-            int pos = 0;
-            textarea.append("\n\nLEXEMA                               COLUMNA           FILA\n\n");
-            for(String tmp : reporte.getPalabrasGuardadas()){
-                textarea.append("Lexema: "+ tmp+" |Columna "+reporte.getPosicionColumna()[pos] + " |fila "+reporte.getPosicionFila()[pos]+"\n");
-                pos++;
-            } 
-
         }
+        this.add(scrollPane, BorderLayout.CENTER);
     }
+
+
     
 }

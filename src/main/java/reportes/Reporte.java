@@ -17,6 +17,7 @@ public class Reporte {
 
     //PALABRAS VALIDAS
     private ArrayList<String> palabrasAgregadas = new ArrayList<>();
+    private ArrayList<String> tokensAgregados = new ArrayList<>();
     private ArrayList<Integer> columnasRegistradas = new ArrayList<>();
     private ArrayList<Integer> filasRegistradas = new ArrayList<>();
 
@@ -56,27 +57,27 @@ public class Reporte {
         
         if(tmp==Token.IDENTIFICADOR || tmp==Token.IDENTIFICADOR2){
             contadores[0]++;
-            registrar(palabra, columna, fila);
+            registrar(palabra, columna, fila,Token.IDENTIFICADOR.getNombreEstado());
         }
         else if(tmp==Token.ENTERO){
             contadores[1]++;
-            registrar(palabra, columna, fila);
+            registrar(palabra, columna, fila,Token.ENTERO.getNombreEstado());
         }
         else if(tmp==Token.PUNTUACION){
             contadores[2]++;
-            registrar(palabra, columna, fila);
+            registrar(palabra, columna, fila,Token.PUNTUACION.getNombreEstado());
         }
         else if(tmp==Token.ARITMETICO){
             contadores[3]++;
-                registrar(palabra, columna, fila);
+                registrar(palabra, columna, fila,Token.ARITMETICO.getNombreEstado());
         }
         else if(tmp==Token.DECIMAL){
             contadores[4]++;
-                registrar(palabra, columna, fila);
+                registrar(palabra, columna, fila,Token.DECIMAL.getNombreEstado());
         }
         else if(tmp==Token.AGRUPACION){
             contadores[5]++;
-                registrar(palabra, columna, fila);
+                registrar(palabra, columna, fila,Token.AGRUPACION.getNombreEstado());
         }
         else if(tmp==Token.ERROR || tmp==Token.ERROR2){
             contadores[6]++;
@@ -179,7 +180,7 @@ public class Reporte {
 
 
     /**
-     * Este metodo se encargara de resetar los valores de los contadores al ser llamado por el boton evaluar
+     * Este metodo se encargara de resetear los valores de los contadores al ser llamado por el boton evaluar
     */
     public void resetContadores(){
         for(int i = 0; i < contadores.length; i++){
@@ -188,29 +189,14 @@ public class Reporte {
     }
 
 
-
-
-    /**
-     * Este metodo se encargara de resetar los valores de los arrays
-    */
-    public void resetArrays(){
-        columnasRegistradas.clear();
-        palabrasAgregadas.clear();
-        filasRegistradas.clear();
-
-        palabrasError.clear();
-        columnasError.clear();
-        filasError.clear();
-
-    }
-
     /** 
      * Metodo encargado de registrar las palabras VALIDAS, filas y columnas de los reportes
     */
-    private void registrar(String palabra, int columna, int fila){
+    private void registrar(String palabra, int columna, int fila, String token){
         palabrasAgregadas.add(palabra); //y agregamos la palabra a la lista de palabras
         columnasRegistradas.add(columna);
         filasRegistradas.add(fila);
+        tokensAgregados.add(token);
     }
 
     /** 
@@ -247,6 +233,8 @@ public class Reporte {
         return pos;
     }
 
+
+
     /**
      * Este metodo se encarga de devolver el array (String) de la posicion de las FILAS de las palabras
      * almacenadas que cumplen con los tokens INVALIDOS
@@ -260,5 +248,33 @@ public class Reporte {
     }
 
 
+
+    /**
+     * Este metodo se encarga de devolver el array (String) de palabras con guardadas o
+     * almacenadas que cumplen con los tokens INVALIDOS
+     * */
+    public String[] getTokensAgregados(){
+        String[] tmp = new String[palabrasAgregadas.size()];
+        for(int i = 0; i < tmp.length; i++){
+            tmp[i] = tokensAgregados.get(i);
+        }
+        return tmp;
+    }
+
+
+     /**
+     * Este metodo se encargara de resetar los valores de los arrays
+    */
+    public void resetArrays(){
+        columnasRegistradas.clear();
+        palabrasAgregadas.clear();
+        filasRegistradas.clear();
+        tokensAgregados.clear();
+
+        palabrasError.clear();
+        columnasError.clear();
+        filasError.clear();
+
+    }
 
 }
