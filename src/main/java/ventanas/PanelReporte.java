@@ -10,6 +10,7 @@ import reportes.Reporte;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class PanelReporte extends JPanel{
@@ -26,7 +27,7 @@ public class PanelReporte extends JPanel{
 
     public void imprimeInfo(){
         // Definimos el layout
-        this.setLayout(new BorderLayout());
+        this.setLayout(new GridBagLayout());
         
         //Logica del reporte
         pintaTabla(existeError);
@@ -40,6 +41,7 @@ public class PanelReporte extends JPanel{
         String []filToken=null;
         String texto=null;
         int numCols=4;
+        GridBagConstraints c = new GridBagConstraints();
         if(existeError){
             nombreLexema=reporte.getPalabrasError();
             colToken=reporte.getPosicionColumnaError();
@@ -57,6 +59,10 @@ public class PanelReporte extends JPanel{
         //Creamos el Jtable y le agregamos el scroll
         table = new JTable(nombreLexema.length,numCols);
         JScrollPane scrollPane = new JScrollPane(table,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);    
+        //Definimos su posicion
+        c.gridx=0; c.gridy =0;c.gridwidth=2;c.gridheight=2;
+        c.weighty=1.0; c.weightx=1.0; c.fill=GridBagConstraints.BOTH;
+
 
         //Definimos nombre de las columnas
         table.getColumnModel().getColumn(0).setHeaderValue(texto);
@@ -87,22 +93,75 @@ public class PanelReporte extends JPanel{
             }
         }
         if(existeError){
-            this.add(scrollPane, BorderLayout.CENTER);
+            this.add(scrollPane, c);
+            c.gridx=0; c.gridy =0;c.gridwidth=0;c.gridheight=0;
+
 
         }else{
-            JButton button = new JButton("Click me");
+            this.add(scrollPane,c);
+            c.gridx=0; c.gridy =0;c.gridwidth=0;c.gridheight=0;
+            c.weighty=0.0; c.weightx=0.0;
+
+
+            JButton button = new JButton("Reporte Lexemas");
+            button.setPreferredSize(new Dimension(20,50));
             button.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // Aqui genera el otro reporte xd
-                    
+                    System.out.println("soy reporte de lexemas");
+
+                    new ReporteLexema(reporte.getPalabrasGuardadas(), reporte.getTokensAgregados());
                 }
                 
             });
-            this.add(scrollPane, BorderLayout.CENTER);
-            this.add(button, BorderLayout.SOUTH);
+            
+
+            c.gridx=0; c.gridy =3;c.gridwidth=1;c.gridheight=1;
+            this.add(button,c);
+            c.gridx=0; c.gridy =0;c.gridwidth=0;c.gridheight=0;
+
+
+
+            JButton button2 = new JButton("Reporte Tokens");
+            button2.setPreferredSize(new Dimension(20,50));
+            button2.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Aqui genera el otro reporte xd
+                    System.out.println("soy reporete de tokens");
+                    new ReporteToken(getReporteTokens());
+
+                }
+                
+            });
+            c.gridx=1; c.gridy =3;c.gridwidth=1;c.gridheight=1;
+            
+            this.add(button2,c);
+            c.gridx=0; c.gridy =0;c.gridwidth=0;c.gridheight=0;
         }
+    }
+
+    public String[][] getReporteTokens() {
+        ArrayList<String> tokens = new ArrayList<>();
+        ArrayList<Integer> contador = new ArrayList<>();
+        for(Token tmp : Token.values()) {
+            if(tmp!=Token.ERROR && tmp!=Token.ERROR2 && tmp!=Token.IDENTIFICADOR2){
+                tokens.add(tmp.getNombreEstado());
+                contador.add(reporte.getcontadorEstado(tmp));
+            }
+        }
+
+        String[][] reporteTok= new String[tokens.size()][2];
+        for(int i=0; i<tokens.size(); i++){
+            reporteTok[i][0] = tokens.get(i);
+            reporteTok[i][1] = contador.get(i).toString();
+        }
+
+        
+        return reporteTok;
     }
 
 
