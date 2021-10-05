@@ -104,7 +104,7 @@ public class PanelReporte extends JPanel{
 
 
             JButton button = new JButton("Reporte Lexemas");
-            button.setPreferredSize(new Dimension(20,50));
+            button.setPreferredSize(new Dimension(50,50));
             button.addActionListener(new ActionListener() {
 
                 @Override
@@ -119,13 +119,15 @@ public class PanelReporte extends JPanel{
             
 
             c.gridx=0; c.gridy =3;c.gridwidth=1;c.gridheight=1;
+            c.weighty=0.10; c.weightx=0.20;
+
             this.add(button,c);
             c.gridx=0; c.gridy =0;c.gridwidth=0;c.gridheight=0;
 
 
 
             JButton button2 = new JButton("Reporte Tokens");
-            button2.setPreferredSize(new Dimension(20,50));
+            button2.setPreferredSize(new Dimension(50,50));
             button2.addActionListener(new ActionListener() {
 
                 @Override
@@ -144,6 +146,10 @@ public class PanelReporte extends JPanel{
         }
     }
 
+
+    /**
+     * Devuelve el array con el string[][] del token y su contador
+    */
     public String[][] getReporteTokens() {
         ArrayList<String> tokens = new ArrayList<>();
         ArrayList<Integer> contador = new ArrayList<>();
