@@ -16,6 +16,7 @@ public class Busqueda extends JFrame{
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout());
         JTextArea textA = new JTextArea(textoTA);
+        textA.setEditable(false);
         new Buscador(textA, palabraB);
         this.add(panel);
         this.setSize(400, 400);
