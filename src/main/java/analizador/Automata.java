@@ -5,7 +5,7 @@ import reportes.Reporte;
 
 
 
-/** Metodo  Clase encargada de analizar las palabras del texto en pantalla. 
+/** Clase encargada de analizar las palabras del texto en pantalla. 
  * 
  */
 public class Automata {

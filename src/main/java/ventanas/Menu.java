@@ -2,8 +2,9 @@ package ventanas;
 
 import javax.swing.JFrame;
 
-
-/* Esta clase es la encargada de crear la ventana del menu principal*/
+/**Clase
+ * Esta clase es la encargada de crear la ventana del menu principal
+ */
 public class Menu {
     public Menu() {
         construye();

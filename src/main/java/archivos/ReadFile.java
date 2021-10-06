@@ -6,7 +6,9 @@ import java.io.FileReader;
 import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
 
-/*Clase encargada de leer el archivo de texto*/
+/** 
+ * Clase encargada de leer el archivo de texto
+*/
 public class ReadFile {
     JTextArea textarea;
     JFileChooser f;
@@ -14,9 +16,13 @@ public class ReadFile {
     BufferedReader rdr;
     JTextArea tLabel;
 
-    /**Constructor de la clase ReadFile
-     * @param tlabel
-     * */
+
+    /**
+     * Constructor de la clase ReadFile
+     * @param file archivo (.txt) a analizar
+     * @param textarea text area en donde se escribira el archivo de texto
+     * @param tlabel text area con el numero de linea 
+     */
     public ReadFile(JFileChooser file, JTextArea textarea, JTextArea tlabel){
         this.tLabel= tlabel;
         this.f = file;
@@ -39,7 +45,9 @@ public class ReadFile {
 
 
 
-    /**Metodo encargado de leer el archivo */
+    /**
+     * Metodo encargado de leer el archivo 
+    */
     private void leerArchivo() {
         //int count = 0; //vere que uso le doy
         String linea;
@@ -61,8 +69,10 @@ public class ReadFile {
 
 
     
-    /**Metodo encargado de actualizar el texto del TextArea con el numero de linea correspondiente 
-     * SOLO al cargar un archivo ya existente */
+    /**
+     * Metodo encargado de actualizar el texto del TextArea con el numero de linea correspondiente 
+     * SOLO al cargar un archivo ya existente
+    */
     private void updateText(String textL){
         this.textarea.append(textL+"\n");
     }
