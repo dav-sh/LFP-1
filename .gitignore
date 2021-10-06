@@ -2,3 +2,6 @@
 *.class
 /test
 /target
+.settings
+.classpath
+.project
