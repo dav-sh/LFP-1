@@ -8,13 +8,14 @@ import javax.swing.event.*;
 
 
 import analizador.Automata;
+import analizador.Buscador;
 import analizador.Token;
 import reportes.Reporte;
 
 /**Clase encargada de manejar los elementos dentro del JPanel del menu principal. */
 public class PanelMenu extends JPanel {
     JTextArea textArea;
-
+    JTextField textB;
     JTextArea tLabel;
     Reporte report = new Reporte();
 
@@ -158,6 +159,7 @@ public class PanelMenu extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Hola soy Evaluar");
                 new Automata(textArea, report);
+                JOptionPane.showMessageDialog(null,"Analisis Realizado");
 
 			}
             
@@ -186,31 +188,6 @@ public class PanelMenu extends JPanel {
                 }else{
                     new ReporteJF(false, report);
                 }
-                
-                /*
-
-                for(Token tmp : Token.values()){
-                    /*
-                    if(tmp!=Token.IDENTIFICADOR2 && tmp!=Token.ERROR2){
-                        System.out.println(tmp.getNombreEstado() + " " + report.getcontadorEstado(tmp));  
-
-                    }
-
-                    
-                    
-                    if(tmp==Token.ERROR ){
-
-                        System.out.println(tmp.getNombreEstado() + " " + report.getcontadorEstado(tmp));
-                        System.out.println("****************");
-                    }
-                    
-                }
-                int pos = 0;
-                for(String tmp : report.getPalabrasError()){
-                    System.out.println("Lexema: "+ tmp+" |Columna "+report.getPosicionError()[pos] + " |fila?");
-                    pos++;
-                } 
-                */
              }
              
          });
@@ -221,11 +198,28 @@ public class PanelMenu extends JPanel {
 
 
          //JLabel de la parte inferior
-        JLabel labelU = new JLabel("***************************************************************************");
-        c.gridx = 1; c.gridy = 4; c.gridwidth = 2; c.gridheight = 1; //posicion x,y cuantas casillas ocupa ancho, alto
-        c.weighty=0.0; c.weightx=1.0; c.fill = GridBagConstraints.HORIZONTAL; 
-        this.add(labelU, c);
+        textB = new JTextField("Aqui");
+        c.gridx = 1; c.gridy = 4; c.gridwidth = 1; c.gridheight = 1; //posicion x,y cuantas casillas ocupa ancho, alto
+        c.weighty=0.0; c.weightx=1.0; c.fill = GridBagConstraints.HORIZONTAL;
+        this.add(textB, c);
         c.weighty=0.0; c.weightx=0.0;
+
+        //JButton Busqueda
+        JButton buttonB = new JButton("Buscar"); 
+        c.gridx = 2; c.gridy = 4; c.gridwidth = 1; c.gridheight = 1; //posicion x,y cuantas casillas ocupa ancho, alto
+        c.weighty=1.0; c.weightx=0.2; 
+        buttonB.setPreferredSize(new Dimension(20,20));
+        this.add(buttonB, c);
+        c.weighty=0.0; c.weightx=0.0;
+        buttonB.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new Busqueda(textArea.getText(),textB.getText());
+			}
+            
+        });
 
          
 
