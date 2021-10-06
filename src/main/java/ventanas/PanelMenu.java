@@ -8,7 +8,6 @@ import javax.swing.event.*;
 
 
 import analizador.Automata;
-import analizador.Buscador;
 import analizador.Token;
 import reportes.Reporte;
 
