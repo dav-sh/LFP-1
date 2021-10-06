@@ -5,7 +5,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.*;
 
-
+/**Clase encargada del panel con el reporte de tokens */
 public class PanelRepTok extends JPanel{
     JTable table;
     int numCols=2;
@@ -13,6 +13,10 @@ public class PanelRepTok extends JPanel{
         init(reporteCont);
     }
 
+    /**
+     * Metodo encargado de inicializar los componentes del reporte de tokens
+     * @param reporteCont texto (String) con el contenido del reporte
+     */
     public void init(String[][] reporteCont){
         //Creamos el Jtable y le agregamos el scroll
         this.setLayout(new BorderLayout());

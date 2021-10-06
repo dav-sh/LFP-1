@@ -25,7 +25,13 @@ public class PanelMenu extends JPanel {
     }
 
 
-    /*Este metodo sirve para crear los botones del menu principal */
+    /**
+     * Metodo encargado de crear los botones del menu principal
+     * @param name  nombre del boton a crear (String)
+     * @param layout tipo de layout a utilizar (GridBaglayout)
+     * @param c posicion del boton (GridBaglayout)
+     * @return JButton con los parametros anteriores
+     */
     public JButton createButton(String name, GridBagLayout layout, GridBagConstraints c){
         JButton button = new JButton(name);
         layout.setConstraints(button, c);
@@ -214,7 +220,6 @@ public class PanelMenu extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				new Busqueda(textArea.getText(),textB.getText());
 			}
             

@@ -5,9 +5,9 @@ import reportes.Reporte;
 
 
 
-/**
- * Clase encargada de analizar las palabras del texto en pantalla. 
-*/
+/** Metodo  Clase encargada de analizar las palabras del texto en pantalla. 
+ * 
+ */
 public class Automata {
     String texto;
     int posicion;
@@ -19,7 +19,11 @@ public class Automata {
     //int estadosAceptacion[] = {1,2,3,4,5,7,8}; //B,C,D,E,F,I,J
     //git stash para eliminar cambios no guardados con commit
 
-    /*constructor de la clase automata*/
+    /**
+     * Constructor de la clase automata
+     * @param textArea recibe text area a analizar
+     * @param report    recibe el objeto reporte al cual se le agregaran los nuevos registros
+     */
     public Automata(JTextArea textArea, Reporte report) { 
         this.reporte = report;
         texto=textArea.getText();
@@ -61,7 +65,10 @@ public class Automata {
 
     /**
      * Metodo que se encarga de devolver el siguiente movimiento en la matriz 
-    */
+     * @param estadoActual    recibe el estado actual en el que se encuentra la matriz
+     * @param tipoCaracter    recibe el tipo caracter a evaluar dentro de la matriz
+     * @return
+     */
     public int getNextEstado(int estadoActual, int tipoCaracter){
         int result = -1; //si fuera error        
 
@@ -75,7 +82,9 @@ public class Automata {
 
     /**
      * Metodo encargado de devolver el simbolo o texto del estado final
-    */
+     * @param estadoActual recibe el estado actual del caracter evaluado
+     * @return  regresa el String completo de la palabra a evaluar
+     */
 
     public String getEstadoActual(int estadoActual) {
         String result = "Error "+estadoActual;
@@ -94,9 +103,11 @@ public class Automata {
 
 
 
-    /** 
-     * Metodo encargado de revisar si el caracter esta dentro de nuestro alfabeto
-    */
+    /**
+     *  Metodo encargado de revisar si el caracter esta dentro de nuestro alfabeto
+     * @param caracter recibe el caracter que sera evaluado para ver si pertenece o no al alfabeto
+     * @return regresa el int que indica el tipo de caracter al que pertecene
+     */
     public int getIntTipoCaracter(char caracter) {
         //Definimos el alfabeto restante
         char[] puntuacion = {'.',',',';',':'};

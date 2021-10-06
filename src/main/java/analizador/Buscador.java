@@ -7,6 +7,7 @@ import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**Clase encargada de buscar una palabra en un texto de tipo String */
 public class Buscador {
     String texto=null;
     String palabra;
@@ -15,9 +16,11 @@ public class Buscador {
     ArrayList<Integer> posFinal = new ArrayList<>();
     JTextArea textarea=null;
 
-    /** 
+    /**
      * Constructor que recibe por parametro un nuevo textarea donde sera mostrado el texto analizado y recibe la palabra a buscar  
-    */
+     * @param textarea  String en el cual se buscara la palabra
+     * @param palabra  String de la palabra a buscar
+     */
     public Buscador(JTextArea textarea, String palabra) {
         this.texto = textarea.getText();
         this.palabra = palabra;

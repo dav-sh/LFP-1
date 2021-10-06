@@ -6,12 +6,22 @@ import javax.swing.JTextArea;
 import java.awt.*;
 import analizador.Buscador;
 
-
+/**Clase encargada de inicializar el JFrame de la busqueda */
 public class Busqueda extends JFrame{
+    /**
+     * Constructor
+     * @param textoTA texto obtenido del Panel Menu (String)
+     * @param palabraB texto de la palabra a buscar (String)
+     */
     public Busqueda(String textoTA, String palabraB) {
         creaPanel(textoTA, palabraB);
     }
 
+    /**
+     * Metodo encargado de crear el panel el cual contiene las posibles palabras encontradas
+     * @param textoTA texto obtenido del Panel Menu (String)
+     * @param palabraB texto de la palabra a buscar (String)
+     */
 	private void creaPanel(String textoTA, String palabraB) {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout());

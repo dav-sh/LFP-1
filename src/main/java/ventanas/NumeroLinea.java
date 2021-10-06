@@ -11,6 +11,12 @@ public class NumeroLinea {
     /**Constructor de la clase NumeroLinea
      * 
       */
+
+      /**
+       * Constructor
+       * @param textarea texto (String) obtenido del text area de la clase menu principal
+       * @param tlabel text area encargado del numero de linea
+       */
     public NumeroLinea(JTextArea textarea, JTextArea tlabel) {
         this.textarea = textarea;
         this.tLabel = tlabel;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import analizador.Token;
 
-/** reportes
+/** 
  * Clase encargada de llevar el control de los reportes, de cada token y lexema que se ingresa
  */
 public class Reporte {
@@ -38,9 +38,15 @@ public class Reporte {
        //contadores 
     }
 
+
+
     /**
      * Este metodo es el encargado de manejar los contaderes de estado evaluando los parametros recibidos  
-    */
+     * @param estadoToken Ultimo estado del token
+     * @param palabra String de la palabra analizada
+     * @param columna columna en la cual se encontra la palabra
+     * @param fila fila en la cual se encontra la palabra
+     */
     public void contadorEstados(int estadoToken,String palabra, int columna, int fila) {
         for(Token tmp : tokens) {
             if(tmp.getNumeroEstado()==estadoToken) {
@@ -50,9 +56,14 @@ public class Reporte {
     }
 
 
+
     /**
      * Este metodo se encarga de aumentar en 1 el contador de estados si se cumple la condicion 
-    */
+     * @param tmp recibe el token 
+     * @param palabra  String de la palabra analizada
+     * @param columna columna en la cual se encontra la palabra
+     * @param fila  fila en la cual se encontra la palabra
+     */
     private void contadorEstados(Token tmp, String palabra, int columna, int fila) {
         
         if(tmp==Token.IDENTIFICADOR || tmp==Token.IDENTIFICADOR2){
@@ -88,9 +99,12 @@ public class Reporte {
 
 
 
-    /**
-     * Este metodo se encarga de devolver el contador de estados recibiendo por parametro un token (enum) 
-     * */
+
+     /**
+      * Este metodo se encarga de devolver el contador de estados recibiendo por parametro un token (enum) 
+      * @param token token recibido
+      * @return retorna el valor(int) del token recibido
+      */
     public int getcontadorEstado(Token token) {
         int contador=0;
         switch (token) {
@@ -189,9 +203,14 @@ public class Reporte {
     }
 
 
-    /** 
+
+    /**
      * Metodo encargado de registrar las palabras VALIDAS, filas y columnas de los reportes
-    */
+     * @param palabra  String de la palabra analizada
+     * @param columna columna en la cual se encontro la palabra
+     * @param fila fila en la cual se encontro la palabra
+     * @param token token recibido
+     */
     private void registrar(String palabra, int columna, int fila, String token){
         palabrasAgregadas.add(palabra); //y agregamos la palabra a la lista de palabras
         columnasRegistradas.add(columna);
@@ -199,9 +218,14 @@ public class Reporte {
         tokensAgregados.add(token);
     }
 
-    /** 
+
+
+    /**
      * Metodo encargado de registrar las palabras ERRONEAS, filas y columnas de los reportes
-    */
+     * @param palabra  String de la palabra analizada
+     * @param columna columna en la cual se encontra la palabra
+     * @param fila fila en la cual se encontra la palabra
+     */
     private void registrarError(String palabra, int columna, int fila){
         palabrasError.add(palabra); //y agregamos la palabra a la lista de palabras
         columnasError.add(columna);

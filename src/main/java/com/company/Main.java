@@ -6,6 +6,10 @@ import ventanas.*;
  */
 public class Main 
 {
+    /**
+     * Constructor 
+     * @param args ...
+     */
     public static void main( String[] args )
     {
         new Menu();

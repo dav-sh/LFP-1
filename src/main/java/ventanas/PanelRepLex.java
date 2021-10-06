@@ -6,14 +6,26 @@ import javax.swing.JTable;
 import java.awt.*;
 import java.util.ArrayList;
 
-
+/**Clase encargada del panel de reportes de lexemas*/
 public class PanelRepLex extends JPanel{
     JTable table;
     int numCols=3;
+
+    /**
+     * constructor dela clase
+     * @param lexemas array (String[]) lexemas analizados 
+     * @param tokens nombre de tokens (String[]) obtenidos al analizar
+     */
     public PanelRepLex(String[] lexemas, String[] tokens) {
         init(lexemas, tokens);
     }
 
+
+    /**
+     * Metodo encargado de iniciar los componentes del reporte de lexema
+     * @param lexemas array (String[]) lexemas analizados 
+     * @param tokens nombre de tokens (String[]) obtenidos al analizar
+     */
     public void init(String[] lexemas, String[] tokens){
         //Creamos el Jtable y le agregamos el scroll
         this.setLayout(new BorderLayout());
@@ -50,7 +62,12 @@ public class PanelRepLex extends JPanel{
     }
 
 
-
+    /**
+     * Metodo encargado del contador de lexemas
+     * @param lexemas array (String[]) lexemas analizados 
+     * @param tokens nombre de tokens (String[]) obtenidos al analizar
+     * @return
+     */
     public String[][] contador(String[] lexemas, String[] tokens) {
         ArrayList<String> yaRevisado = new ArrayList<>();
         ArrayList<String> yaRevisadoTokens = new ArrayList<>();

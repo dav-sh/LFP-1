@@ -12,19 +12,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-
+/**Clase encargada del panel para el menu de reportes en general */
 public class PanelReporte extends JPanel{
     JTextArea textarea;
     Token token;
     boolean existeError;
     Reporte reporte;
     JTable table;
+
+    /**
+     * constructor de la clase panel reporte
+     * @param b variable (boolean) que nos indica si existe un error o no
+     * @param reporte objeto reporte obtenido del panel Menu
+     */
     public PanelReporte(boolean b, Reporte reporte) {
         this.existeError = b;
         this.reporte = reporte;
         imprimeInfo();
     }
 
+    /**Metodo encargado de imprimir la informacion */
     public void imprimeInfo(){
         // Definimos el layout
         this.setLayout(new GridBagLayout());
@@ -33,7 +40,10 @@ public class PanelReporte extends JPanel{
         pintaTabla(existeError);
     }
     
-    
+    /**
+     * Metodo encargado de pintar o dibujar la tabla de reportes
+     * @param existeError variable obtenida de la misma clase
+     */
     public void pintaTabla(boolean existeError){
         String [] tipoToken = null;
         String []nombreLexema=null;
