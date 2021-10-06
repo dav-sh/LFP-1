@@ -77,6 +77,13 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <configuration>
+             <source>1.7</source>
+             <maxmemory>512</maxmemory>
+          </configuration>
+       </plugin>
       </plugins>
     </pluginManagement>
   </build>
