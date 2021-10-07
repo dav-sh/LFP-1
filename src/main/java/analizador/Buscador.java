@@ -11,9 +11,6 @@ import java.util.ArrayList;
 public class Buscador {
     String texto=null;
     String palabra;
-    int posicion=0;
-    ArrayList<Integer> posInicial = new ArrayList<>();
-    ArrayList<Integer> posFinal = new ArrayList<>();
     JTextArea textarea=null;
 
     /**
