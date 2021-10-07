@@ -5,8 +5,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
-
-
 import analizador.Automata;
 import analizador.Token;
 import reportes.Reporte;
@@ -203,9 +201,16 @@ public class PanelMenu extends JPanel {
 
 
          //JLabel de la parte inferior
-        textB = new JTextField("Aqui");
+        textB = new JTextField("Buscar texto:");
         c.gridx = 1; c.gridy = 4; c.gridwidth = 1; c.gridheight = 1; //posicion x,y cuantas casillas ocupa ancho, alto
         c.weighty=0.0; c.weightx=1.0; c.fill = GridBagConstraints.HORIZONTAL;
+        textB.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e){
+                textB.setText("");
+            }
+
+        });
         this.add(textB, c);
         c.weighty=0.0; c.weightx=0.0;
 

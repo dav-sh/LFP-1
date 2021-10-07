@@ -12,7 +12,7 @@ public class Menu {
 
     /*Este metodo se encarga de construir la ventana del menu*/
     public void construye() {
-        JFrame frame = new JFrame("Principal");
+        JFrame frame = new JFrame("Inicio");
         frame.setDefaultCloseOperation(3);
         frame.add(new PanelMenu());
         frame.setSize(600, 400);

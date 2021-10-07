@@ -14,6 +14,7 @@ public class Busqueda extends JFrame{
      * @param palabraB texto de la palabra a buscar (String)
      */
     public Busqueda(String textoTA, String palabraB) {
+        super("Busqueda");
         creaPanel(textoTA, palabraB);
     }
 
