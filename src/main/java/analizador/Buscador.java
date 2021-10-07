@@ -2,7 +2,6 @@ package analizador;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.Highlighter;
 import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 import java.awt.*;
@@ -56,7 +55,7 @@ public class Buscador {
                             highlighter.addHighlight(i, i+palabra.length(), pinta);
                             
                         } catch (Exception e) {
-                            System.out.println("No se pudo resaltar");
+                            System.out.println("No se pudo resaltar, porque estaba fuera del indice");
                         }
                     }
                 }

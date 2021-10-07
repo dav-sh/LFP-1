@@ -1,7 +1,9 @@
 package analizador;
 
+import javax.swing.*;
 import javax.swing.JTextArea;
 import reportes.Reporte;
+import java.awt.*;
 
 
 
@@ -9,6 +11,7 @@ import reportes.Reporte;
  * 
  */
 public class Automata {
+    StringBuilder movimiento;
     String texto;
     int posicion;
     int fila=1;
@@ -25,12 +28,15 @@ public class Automata {
      * @param report    recibe el objeto reporte al cual se le agregaran los nuevos registros
      */
     public Automata(JTextArea textArea, Reporte report) { 
+        movimiento = new StringBuilder();
         this.reporte = report;
         texto=textArea.getText();
         leeTexto();
+        muestraMovimiento(movimiento.toString());
     }
 
-    /** 
+  
+	/** 
      * A=0  B=1  C=2  D=3   E=4   F=5  H=6 I=7 J=8
      * ERROR = -1
      */
@@ -193,11 +199,14 @@ public class Automata {
 
                 if(Character.toString(c).equals("\n")){
                     System.out.println("Posicion:"+ columna + " = salto linea ");
+                    movimiento.append("Salto de linea\n");
                     fila++; //Si dectecta un salto de linea aumenta en 1 el numero de filas
                     columna=0; //inicializa en 0 ya que el contador la aumenta a 1
                     
                 }else if(Character.isSpaceChar(c) ){ 
-                        System.out.println("Posicion:"+ columna + " = Espacio " );
+                    System.out.println("Posicion:"+ columna + " = Espacio " );
+                    movimiento.append("Espacio\n");
+
                 }
 
 
@@ -211,6 +220,7 @@ public class Automata {
                 
                 //Si no detecta salto de linea o espacio reconoce la cadena como valida sin importar que este en error y guarda su posicion
                 System.out.println("estado actual "+estadoActual+" Caracter: "+c +" estado temporal(siguiente) "+ estadoTemporal+ " posicion: "+ posicion);
+                movimiento.append("estado actual "+estadoActual+" Caracter: "+c +" estado temporal(siguiente) "+ estadoTemporal+ " posicion: "+ posicion+"\n");
                 estadoActual = estadoTemporal;
                 columnaValida = columna;
                 filaValida = fila;
@@ -219,11 +229,29 @@ public class Automata {
             posicion++;
         }
         System.out.println("Me movi del estado "+estadoActual + " al estado "+ getEstadoActual(estadoActual)+" con un(a) "+ palabra.toString()+" ->*columna: "+columnaValida + "  fila "+ filaValida);
-        
         //creamos el reporte el cual tiene por parametros el estado actual del token(si es valido o no), el lexema completo(palabra evaluada), el numero de columna en donde se encontro, el numeor de fila donde se encontro 
+        movimiento.append("Me movi del estado "+estadoActual + " al estado "+ getEstadoActual(estadoActual)+" con un(a) "+ palabra.toString()+" ->*columna: "+columnaValida + "  fila "+ filaValida+"\n");
         reporte.contadorEstados(estadoActual,palabra.toString(),columnaValida,filaValida);
 
     }
+
+    private void muestraMovimiento(String mov) {
+        JFrame frameMov = new JFrame("Mov. Automata");
+        JPanel panelMov = new JPanel();
+        panelMov.setLayout(new GridLayout());
+        JTextArea textareaMov = new JTextArea(mov);
+        textareaMov.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textareaMov);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        panelMov.add(scrollPane);
+        frameMov.add(panelMov);
+        frameMov.setSize(400, 400);
+        frameMov.setVisible(true);
+
+
+	}
+
     
 
 
